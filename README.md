@@ -33,15 +33,26 @@ For a JavaScript implementation, refer to the [Color2D](https://github.com/domin
 
 ## Example
 
-The following example demonstrates how this library is used to map 2D coordinates to colors.
+Basic usage with normalized inputs (i.e., x- and y-coordinates ranging from 0 to 1):
 
 ```Python
-# Import the Bremm et al. color map class.
 from pycolormap_2d import ColorMap2DBremm
 
 # Create the color map object.
 cmap = ColorMap2DBremm()
 
-# Get the color value at relative position [0.2, 0.6].
+# Get the color value.
 color = cmap(0.2, 0.6)
+```
+
+Optionally, ranges for the input x and y input ranges can be passed during object creation:
+
+```Python
+from pycolormap_2d import ColorMap2DBremm
+
+# Create the color map object.
+cmap = ColorMap2DBremm(range_x=(-10, 30), range_y=(1, 11))
+
+# Get the color value.
+color = cmap(10.0, 8.5)
 ```
