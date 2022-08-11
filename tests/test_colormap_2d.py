@@ -11,7 +11,7 @@ from nptyping import NDArray, UInt8, Shape
 from pycolormap_2d.colormap_2d import (ColorMap2DBremm)
 
 
-class ColorMap2D:
+class TestColorMap2D:
     """Test suite for ColorMap2D class."""
 
     def test_colormap_load(self):
