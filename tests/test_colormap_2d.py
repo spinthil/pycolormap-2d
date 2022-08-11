@@ -37,6 +37,6 @@ class TestColorMap2D:
 
     def test_colormap_call_not_normalized(self):
         """Test color map sampling"""
-        cmap = ColorMap2DBremm(normalize=False)
+        cmap = ColorMap2DBremm(range_x=(-10, 30), range_y=(1, 11))
         # Corresponds to pixel coordinates (256, 384)
-        assert np.array_equal(cmap(255, 383), np.array([191, 105, 133]))
+        assert np.array_equal(cmap(10.0, 8.5), np.array([191, 105, 133]))
