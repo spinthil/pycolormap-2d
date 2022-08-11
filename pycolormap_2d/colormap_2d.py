@@ -18,11 +18,14 @@ T = TypeVar("T", int, float)
 class ColorMap2D(metaclass=abc.ABCMeta):
     """Abstract class providing the basic functionality of the 2D color map.
 
-    :param colormap_npy_loc: The location of the numpy file that contains the color map data.
+    :param colormap_npy_loc: The location of the numpy file that contains the
+                             color map data.
     :type colormap_npy_loc: str
-    :param range_x: The range of input x-values. Used to adapt the color map to un-normalized input data.
+    :param range_x: The range of input x-values. Used to adapt the color map to
+                    un-normalized input data.
     :type range_x: Tuple[T, T]
-    :param range_y: The range of input y-values. Used to adapt the color map to un-normalized input data.
+    :param range_y: The range of input y-values. Used to adapt the color map to
+                    un-normalized input data.
     :type range_y: Tuple[T, T]
     """
 
@@ -32,7 +35,8 @@ class ColorMap2D(metaclass=abc.ABCMeta):
     range_x: Tuple[T, T]
     range_y: Tuple[T, T]
 
-    def __init__(self, colormap_npy_loc: str, range_x: Tuple[T, T], range_y: Tuple[T, T]) -> None:
+    def __init__(self, colormap_npy_loc: str, range_x: Tuple[T, T],
+                 range_y: Tuple[T, T]) -> None:
         stream = pkg_resources.resource_stream(__name__, colormap_npy_loc)
         self._cmap_data = np.load(stream)
         self._cmap_width = self._cmap_data.shape[0]
@@ -52,28 +56,36 @@ class ColorMap2D(metaclass=abc.ABCMeta):
         return min(interval[1], max(interval[0], v))
 
     @staticmethod
-    def _linearly_scale_value(value: T, from_range: Tuple[T, T], to_range: Tuple[T, T]) -> T:
-        return (value - from_range[0]) * (to_range[1] - to_range[0]) / (from_range[1] - from_range[0]) + to_range[0]
+    def _linearly_scale_value(value: T, from_range: Tuple[T, T],
+                              to_range: Tuple[T, T]) -> T:
+        return (value - from_range[0]) * (to_range[1] - to_range[0]) / (
+                from_range[1] - from_range[0]) + to_range[0]
 
     def get_cmap_data(self) -> NDArray[Shape, UInt8]:
         return self._cmap_data.copy()
 
     def _scale_x(self, x: T) -> T:
-        return self._linearly_scale_value(x, self.range_x, (0, self._cmap_width - 1))
+        return self._linearly_scale_value(x, self.range_x,
+                                          (0, self._cmap_width - 1))
 
     def _scale_y(self, y: T) -> T:
-        return self._linearly_scale_value(y, self.range_y, (0, self._cmap_height - 1))
+        return self._linearly_scale_value(y, self.range_y,
+                                          (0, self._cmap_height - 1))
 
     def sample(self, x: T, y: T) -> NDArray[Shape["3"], UInt8]:
         """Get the color value at position (x, y).
-        :param x: The x-coordinate (in the x_range given in the constructor or [0, 1] otherwise).
+        :param x: The x-coordinate (in the x_range given in the constructor or
+                  [0, 1] otherwise).
         :type x: int or float
-        :param y: The y-coordinate (in the y_range given in the constructor or [0, 1] otherwise).
+        :param y: The y-coordinate (in the y_range given in the constructor or
+                  [0, 1] otherwise).
         :type y: int or float
         :rtype: NDArray[Shape["3"], UInt8]
         """
-        image_x = self._clamp(int(round(self._scale_x(x))), (0, self._cmap_width - 1))
-        image_y = self._clamp(int(round(self._scale_y(y))), (0, self._cmap_height - 1))
+        image_x = self._clamp(int(round(self._scale_x(x))),
+                              (0, self._cmap_width - 1))
+        image_y = self._clamp(int(round(self._scale_y(y))),
+                              (0, self._cmap_height - 1))
 
         return self._cmap_data[image_x, image_y, :]
 
@@ -81,76 +93,94 @@ class ColorMap2D(metaclass=abc.ABCMeta):
 class ColorMap2DBremm(ColorMap2D):
     """ColorMap2D using the Bremm color map.
 
-    :param range_x: The range of input x-values. Can be used to adapt the color map to un-normalized input data.
+    :param range_x: The range of input x-values. Can be used to adapt the color
+                    map to un-normalized input data.
     :type range_x: Tuple[T, T]
-    :param range_y: The range of input y-values. Can be used to adapt the color map to un-normalized input data.
+    :param range_y: The range of input y-values. Can be used to adapt the color
+                    map to un-normalized input data.
     :type range_y: Tuple[T, T]
     """
 
-    def __init__(self, range_x: Tuple[T, T] = (0.0, 1.0), range_y: Tuple[T, T] = (0.0, 1.0)) -> None:
+    def __init__(self, range_x: Tuple[T, T] = (0.0, 1.0),
+                 range_y: Tuple[T, T] = (0.0, 1.0)) -> None:
         super().__init__("data/bremm.npy", range_x, range_y)
 
 
 class ColorMap2DCubeDiagonal(ColorMap2D):
     """ColorMap2D using the CubeDiagonal color map.
 
-    :param range_x: The range of input x-values. Can be used to adapt the color map to un-normalized input data.
+    :param range_x: The range of input x-values. Can be used to adapt the color
+                    map to un-normalized input data.
     :type range_x: Tuple[T, T]
-    :param range_y: The range of input y-values. Can be used to adapt the color map to un-normalized input data.
+    :param range_y: The range of input y-values. Can be used to adapt the color
+                    map to un-normalized input data.
     :type range_y: Tuple[T, T]
     """
 
-    def __init__(self, range_x: Tuple[T, T] = (0.0, 1.0), range_y: Tuple[T, T] = (0.0, 1.0)) -> None:
+    def __init__(self, range_x: Tuple[T, T] = (0.0, 1.0),
+                 range_y: Tuple[T, T] = (0.0, 1.0)) -> None:
         super().__init__("data/cubediagonal.npy", range_x, range_y)
 
 
 class ColorMap2DSchumann(ColorMap2D):
     """ColorMap2D using the Schumann color map.
 
-    :param range_x: The range of input x-values. Can be used to adapt the color map to un-normalized input data.
+    :param range_x: The range of input x-values. Can be used to adapt the color
+                    map to un-normalized input data.
     :type range_x: Tuple[T, T]
-    :param range_y: The range of input y-values. Can be used to adapt the color map to un-normalized input data.
+    :param range_y: The range of input y-values. Can be used to adapt the color
+                    map to un-normalized input data.
     :type range_y: Tuple[T, T]
     """
 
-    def __init__(self, range_x: Tuple[T, T] = (0.0, 1.0), range_y: Tuple[T, T] = (0.0, 1.0)) -> None:
+    def __init__(self, range_x: Tuple[T, T] = (0.0, 1.0),
+                 range_y: Tuple[T, T] = (0.0, 1.0)) -> None:
         super().__init__("data/schumann.npy", range_x, range_y)
 
 
 class ColorMap2DSteiger(ColorMap2D):
     """ColorMap2D using the Steiger color map.
 
-    :param range_x: The range of input x-values. Can be used to adapt the color map to un-normalized input data.
+    :param range_x: The range of input x-values. Can be used to adapt the color
+                    map to un-normalized input data.
     :type range_x: Tuple[T, T]
-    :param range_y: The range of input y-values. Can be used to adapt the color map to un-normalized input data.
+    :param range_y: The range of input y-values. Can be used to adapt the color
+                    map to un-normalized input data.
     :type range_y: Tuple[T, T]
     """
 
-    def __init__(self, range_x: Tuple[T, T] = (0.0, 1.0), range_y: Tuple[T, T] = (0.0, 1.0)) -> None:
+    def __init__(self, range_x: Tuple[T, T] = (0.0, 1.0),
+                 range_y: Tuple[T, T] = (0.0, 1.0)) -> None:
         super().__init__("data/steiger.npy", range_x, range_y)
 
 
 class ColorMap2DTeuling2(ColorMap2D):
     """ColorMap2D using the Teuling2 color map.
 
-    :param range_x: The range of input x-values. Can be used to adapt the color map to un-normalized input data.
+    :param range_x: The range of input x-values. Can be used to adapt the color
+                    map to un-normalized input data.
     :type range_x: Tuple[T, T]
-    :param range_y: The range of input y-values. Can be used to adapt the color map to un-normalized input data.
+    :param range_y: The range of input y-values. Can be used to adapt the color
+                    map to un-normalized input data.
     :type range_y: Tuple[T, T]
     """
 
-    def __init__(self, range_x: Tuple[T, T] = (0.0, 1.0), range_y: Tuple[T, T] = (0.0, 1.0)) -> None:
+    def __init__(self, range_x: Tuple[T, T] = (0.0, 1.0),
+                 range_y: Tuple[T, T] = (0.0, 1.0)) -> None:
         super().__init__("data/teulingfig2.npy", range_x, range_y)
 
 
 class ColorMap2DZiegler(ColorMap2D):
     """ColorMap2D using the Ziegler color map.
 
-    :param range_x: The range of input x-values. Can be used to adapt the color map to un-normalized input data.
+    :param range_x: The range of input x-values. Can be used to adapt the color
+                    map to un-normalized input data.
     :type range_x: Tuple[T, T]
-    :param range_y: The range of input y-values. Can be used to adapt the color map to un-normalized input data.
+    :param range_y: The range of input y-values. Can be used to adapt the color
+                    map to un-normalized input data.
     :type range_y: Tuple[T, T]
     """
 
-    def __init__(self, range_x: Tuple[T, T] = (0.0, 1.0), range_y: Tuple[T, T] = (0.0, 1.0)) -> None:
+    def __init__(self, range_x: Tuple[T, T] = (0.0, 1.0),
+                 range_y: Tuple[T, T] = (0.0, 1.0)) -> None:
         super().__init__("data/ziegler.npy", range_x, range_y)
