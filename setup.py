@@ -31,14 +31,9 @@ setup(
     install_requires=['numpy', 'nptyping'],
     license=about['__license__'],
     zip_safe=False,
-    entry_points={
-        'console_scripts': [
-            'py-package-template=pycolormap_2d.entry_points:main'],
-    },
     classifiers=[
-        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'Programming Language :: Python :: 3.7',
     ],
-    keywords='package development template'
+    keywords='colormap visualization'
 )
