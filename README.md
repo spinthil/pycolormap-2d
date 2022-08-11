@@ -1,6 +1,6 @@
 # Colormap 2D Python Package
 
-This package allows to map 2D coordinates to different 2D color maps.
+This package allows to map 2D coordinates to different 2D color maps. It can be installed from [PyPi](https://pypi.org/project/pycolormap-2d/).
 
 The following color maps are available:
 
@@ -30,7 +30,7 @@ The following color maps are available:
 </table>
 
 The package is based on 
-> M. Steiger, J. Bernard, S. Thum, S. Mittelstädt, M. Hutter, D. A. Keim, and  J. Kohlhammer, “Explorative Analysis of 2D Color Maps,” in _International Conferences in Central Europe on Computer Graphics, Visualization and Computer Vision_, 2015, vol. 23, pp. 151–160.**
+> M. Steiger, J. Bernard, S. Thum, S. Mittelstädt, M. Hutter, D. A. Keim, and  J. Kohlhammer, “Explorative Analysis of 2D Color Maps,” in _International Conferences in Central Europe on Computer Graphics, Visualization and Computer Vision_, 2015, vol. 23, pp. 151–160.
 
 For a JavaScript implementation, refer to the [Color2D](https://github.com/dominikjaeckle/Color2D) project by [Dominik Jäckle](http://dominikjaeckle.com/).
 
