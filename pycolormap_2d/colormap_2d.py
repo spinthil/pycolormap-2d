@@ -72,6 +72,15 @@ class ColorMap2D(Generic[T], metaclass=abc.ABCMeta):
         return self._linearly_scale_value(y, self.range_y,
                                           (0.0, float(self._cmap_height - 1)))
 
+    def _sample(self, x: T, y: T) -> NDArray[Shape["3"], UInt8]:
+        image_x = self._clamp(int(round(self._scale_x(x))),
+                              (0, self._cmap_width - 1))
+        image_y = self._clamp(int(round(self._scale_y(y))),
+                              (0, self._cmap_height - 1))
+
+        return self._cmap_data[image_x, image_y, :]
+
+    @abc.abstractmethod
     def sample(self, x: T, y: T) -> NDArray[Shape["3"], UInt8]:
         """Get the color value at position (x, y).
 
@@ -83,12 +92,7 @@ class ColorMap2D(Generic[T], metaclass=abc.ABCMeta):
         :type y: int or float
         :rtype: NDArray[Shape["3"], UInt8]
         """
-        image_x = self._clamp(int(round(self._scale_x(x))),
-                              (0, self._cmap_width - 1))
-        image_y = self._clamp(int(round(self._scale_y(y))),
-                              (0, self._cmap_height - 1))
-
-        return self._cmap_data[image_x, image_y, :]
+        pass
 
 
 class ColorMap2DBremm(ColorMap2D):
@@ -106,6 +110,9 @@ class ColorMap2DBremm(ColorMap2D):
                  range_y: Tuple[float, float] = (0.0, 1.0)) -> None:
         super().__init__("data/bremm.npy", range_x, range_y)
 
+    def sample(self, x: T, y: T) -> NDArray[Shape["3"], UInt8]:
+        return super()._sample(x, y)
+
 
 class ColorMap2DCubeDiagonal(ColorMap2D):
     """ColorMap2D using the CubeDiagonal color map.
@@ -121,6 +128,9 @@ class ColorMap2DCubeDiagonal(ColorMap2D):
     def __init__(self, range_x: Tuple[float, float] = (0.0, 1.0),
                  range_y: Tuple[float, float] = (0.0, 1.0)) -> None:
         super().__init__("data/cubediagonal.npy", range_x, range_y)
+
+    def sample(self, x: T, y: T) -> NDArray[Shape["3"], UInt8]:
+        return super()._sample(x, y)
 
 
 class ColorMap2DSchumann(ColorMap2D):
@@ -138,6 +148,9 @@ class ColorMap2DSchumann(ColorMap2D):
                  range_y: Tuple[float, float] = (0.0, 1.0)) -> None:
         super().__init__("data/schumann.npy", range_x, range_y)
 
+    def sample(self, x: T, y: T) -> NDArray[Shape["3"], UInt8]:
+        return super()._sample(x, y)
+
 
 class ColorMap2DSteiger(ColorMap2D):
     """ColorMap2D using the Steiger color map.
@@ -153,6 +166,9 @@ class ColorMap2DSteiger(ColorMap2D):
     def __init__(self, range_x: Tuple[float, float] = (0.0, 1.0),
                  range_y: Tuple[float, float] = (0.0, 1.0)) -> None:
         super().__init__("data/steiger.npy", range_x, range_y)
+
+    def sample(self, x: T, y: T) -> NDArray[Shape["3"], UInt8]:
+        return super()._sample(x, y)
 
 
 class ColorMap2DTeuling2(ColorMap2D):
@@ -170,6 +186,9 @@ class ColorMap2DTeuling2(ColorMap2D):
                  range_y: Tuple[float, float] = (0.0, 1.0)) -> None:
         super().__init__("data/teulingfig2.npy", range_x, range_y)
 
+    def sample(self, x: T, y: T) -> NDArray[Shape["3"], UInt8]:
+        return super()._sample(x, y)
+
 
 class ColorMap2DZiegler(ColorMap2D):
     """ColorMap2D using the Ziegler color map.
@@ -185,3 +204,6 @@ class ColorMap2DZiegler(ColorMap2D):
     def __init__(self, range_x: Tuple[float, float] = (0.0, 1.0),
                  range_y: Tuple[float, float] = (0.0, 1.0)) -> None:
         super().__init__("data/ziegler.npy", range_x, range_y)
+
+    def sample(self, x: T, y: T) -> NDArray[Shape["3"], UInt8]:
+        return super()._sample(x, y)
