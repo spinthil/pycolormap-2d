@@ -37,7 +37,7 @@ The following example demonstrates how this library is used to map 2D coordinate
 
 ```Python
 # Import the Bremm et al. color map class.
-from colormap_2d import ColorMap2DBremm
+from pycolormap_2d import ColorMap2DBremm
 
 # Create the color map object.
 cmap = ColorMap2DBremm()

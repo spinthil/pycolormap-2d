@@ -3,12 +3,12 @@ tests.colormap_2d.py
 ~~~~~~~~~~~~~~~~~~~~
 
 TODO
-Test suite for the colormap_2d.py module.
+Test suite for the pycolormap_2d.py module.
 """
 import numpy as np
 from nptyping import NDArray, UInt8, Shape
 
-from pycolormap_2d.colormap_2d import (ColorMap2DBremm)
+from pycolormap_2d import (ColorMap2DBremm)
 
 
 class TestColorMap2D:
@@ -17,7 +17,8 @@ class TestColorMap2D:
     def test_colormap_load(self):
         """Test data file load"""
         cmap = ColorMap2DBremm()
-        assert isinstance(cmap.get_cmap_data(), NDArray[Shape["512, 512, 3"], UInt8])
+        assert isinstance(cmap.get_cmap_data(),
+                          NDArray[Shape["512, 512, 3"], UInt8])
 
     def test_colormap_call_result_type(self):
         """Test color map sampling"""
