@@ -16,7 +16,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.abspath('../..'))
-from py_pkg.__version__ import __version__
+from pycolormap_2d.__version__ import __version__
 
 
 # -- Project information -----------------------------------------------------
@@ -108,7 +108,7 @@ html_static_path = ['_static']
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'py_pkg'
+htmlhelp_basename = 'pycolormap_2d'
 
 
 # -- Options for LaTeX output ------------------------------------------------

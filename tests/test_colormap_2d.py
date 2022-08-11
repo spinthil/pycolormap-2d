@@ -8,7 +8,7 @@ Test suite for the colormap_2d.py module.
 import numpy as np
 from nptyping import NDArray, UInt8, Shape
 
-from py_pkg.colormap_2d import (ColorMap2DBremm)
+from pycolormap_2d.colormap_2d import (ColorMap2DBremm)
 
 
 class ColorMap2D:

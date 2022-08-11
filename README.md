@@ -71,7 +71,7 @@ The `entry_points.py` module is referenced in the `setup.py` file via the `entry
 
 ```python
 entry_points={
-    'console_scripts': ['py-package-template=py_pkg.entry_points:main'],
+    'console_scripts': ['py-package-template=pycolormap_2d.entry_points:main'],
 }
 ```
 
@@ -157,7 +157,7 @@ The `conftest.py` module is used by PyTest - in this particular instance for loa
 I prefer to use [flake8](http://flake8.pycqa.org/en/latest/) for style guide enforcement. This can be invoked from the command line by running,
 
 ```bash
-pipenv run flake8 py_pkg
+pipenv run flake8 pycolormap_2d
 ```
 
 Flake8 could easily be swapped-out for another tool by using Pipenv as described above.
@@ -167,7 +167,7 @@ Flake8 could easily be swapped-out for another tool by using Pipenv as described
 We have used the Python type annotation framework, together with the [MyPy package](http://mypy-lang.org), to perform static type checks on the codebase. Analogous to any linter or unit testing framework, MyPy can be run from the command line as follows,
 
 ```bash
-pipenv run python -m mypy py_pkg/*.py
+pipenv run python -m mypy pycolormap_2d/*.py
 ```
 
 MyPy options for this project can be defined in the `mypy.ini` file that MyPy will look for by default. For more information on the full set of options, see the [mypy documentation](https://mypy.readthedocs.io/en/stable/config_file.html).

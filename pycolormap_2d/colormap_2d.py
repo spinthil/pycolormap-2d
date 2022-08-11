@@ -1,5 +1,5 @@
 """
-py_pkg.colormap_2d.py
+pycolormap_2d.colormap_2d.py
 ~~~~~~~~~~~~~~~~
 
 This exaple module contains classes that model economic supply and

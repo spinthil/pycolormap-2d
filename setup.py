@@ -3,10 +3,10 @@
 import os
 from setuptools import setup
 
-# get key package details from py_pkg/__version__.py
+# get key package details from pycolormap_2d/__version__.py
 about = {}  # type: ignore
 here = os.path.abspath(os.path.dirname(__file__))
-with open(os.path.join(here, 'py_pkg', '__version__.py')) as f:
+with open(os.path.join(here, 'pycolormap_2d', '__version__.py')) as f:
     exec(f.read(), about)
 
 # load the README file and use it as the long_description for PyPI
@@ -24,15 +24,15 @@ setup(
     author=about['__author__'],
     author_email=about['__author_email__'],
     url=about['__url__'],
-    packages=['py_pkg'],
+    packages=['pycolormap_2d'],
     include_package_data=True,
-    package_data={'py_pkg': ['data/*.npy']},
+    package_data={'pycolormap_2d': ['data/*.npy']},
     python_requires=">=3.7.*",
     install_requires=['numpy'],
     license=about['__license__'],
     zip_safe=False,
     entry_points={
-        'console_scripts': ['py-package-template=py_pkg.entry_points:main'],
+        'console_scripts': ['py-package-template=pycolormap_2d.entry_points:main'],
     },
     classifiers=[
         'Development Status :: 4 - Beta',
