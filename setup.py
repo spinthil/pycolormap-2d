@@ -32,8 +32,12 @@ setup(
     license=about['__license__'],
     zip_safe=False,
     classifiers=[
-        'Intended Audience :: Developers',
+        'Intended Audience :: Science/Research',
+        'Intended Audience :: Education',
         'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10'
     ],
     keywords='colormap visualization'
 )
