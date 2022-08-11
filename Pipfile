@@ -5,8 +5,6 @@ name = "pypi"
 
 [packages]
 numpy = "*"
-nptyping = "*"
-twine = "*"
 
 [dev-packages]
 "flake8" = "*"
@@ -15,6 +13,8 @@ ipython = "*"
 mypy = "*"
 sphinx = "*"
 sphinx-rtd-theme = "*"
+nptyping = "*"
+twine = "*"
 
 [requires]
 python_version = "3.7"

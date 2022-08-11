@@ -28,11 +28,12 @@ setup(
     include_package_data=True,
     package_data={'pycolormap_2d': ['data/*.npy']},
     python_requires=">=3.7.*",
-    install_requires=['numpy'],
+    install_requires=['numpy', 'nptyping'],
     license=about['__license__'],
     zip_safe=False,
     entry_points={
-        'console_scripts': ['py-package-template=pycolormap_2d.entry_points:main'],
+        'console_scripts': [
+            'py-package-template=pycolormap_2d.entry_points:main'],
     },
     classifiers=[
         'Development Status :: 4 - Beta',
