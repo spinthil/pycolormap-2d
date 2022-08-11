@@ -1,8 +1,5 @@
-The py_pkg Package
-==================
+The PyColorMap 2D Package
+=========================
 
-.. automodule:: py_pkg.curves
-    :members:
-
-.. automodule:: py_pkg.entry_points
+.. automodule:: pycolormap_2d.colormap_2d
     :members:

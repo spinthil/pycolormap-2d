@@ -1,6 +1,6 @@
 """
 pycolormap_2d.colormap_2d.py
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This module contains the ColorMap2D base class and its instantiable children.
 """
@@ -19,13 +19,13 @@ class ColorMap2D(Generic[T], metaclass=abc.ABCMeta):
     """Abstract class providing the basic functionality of the 2D color map.
 
     :param colormap_npy_loc: The location of the numpy file that contains the
-                             color map data.
+        color map data.
     :type colormap_npy_loc: str
     :param range_x: The range of input x-values. Used to adapt the color map to
-                    un-normalized input data.
+        un-normalized input data.
     :type range_x: Tuple[float, float]
     :param range_y: The range of input y-values. Used to adapt the color map to
-                    un-normalized input data.
+        un-normalized input data.
     :type range_y: Tuple[float, float]
     """
 
@@ -74,11 +74,12 @@ class ColorMap2D(Generic[T], metaclass=abc.ABCMeta):
 
     def sample(self, x: T, y: T) -> NDArray[Shape["3"], UInt8]:
         """Get the color value at position (x, y).
+
         :param x: The x-coordinate (in the x_range given in the constructor or
-                  [0, 1] otherwise).
+            [0, 1] otherwise).
         :type x: int or float
         :param y: The y-coordinate (in the y_range given in the constructor or
-                  [0, 1] otherwise).
+            [0, 1] otherwise).
         :type y: int or float
         :rtype: NDArray[Shape["3"], UInt8]
         """
@@ -94,10 +95,10 @@ class ColorMap2DBremm(ColorMap2D):
     """ColorMap2D using the Bremm color map.
 
     :param range_x: The range of input x-values. Can be used to adapt the color
-                    map to un-normalized input data.
+        map to un-normalized input data.
     :type range_x: Tuple[float, float]
     :param range_y: The range of input y-values. Can be used to adapt the color
-                    map to un-normalized input data.
+        map to un-normalized input data.
     :type range_y: Tuple[float, float]
     """
 
@@ -110,10 +111,10 @@ class ColorMap2DCubeDiagonal(ColorMap2D):
     """ColorMap2D using the CubeDiagonal color map.
 
     :param range_x: The range of input x-values. Can be used to adapt the color
-                    map to un-normalized input data.
+        map to un-normalized input data.
     :type range_x: Tuple[float, float]
     :param range_y: The range of input y-values. Can be used to adapt the color
-                    map to un-normalized input data.
+        map to un-normalized input data.
     :type range_y: Tuple[float, float]
     """
 
@@ -126,10 +127,10 @@ class ColorMap2DSchumann(ColorMap2D):
     """ColorMap2D using the Schumann color map.
 
     :param range_x: The range of input x-values. Can be used to adapt the color
-                    map to un-normalized input data.
+        map to un-normalized input data.
     :type range_x: Tuple[float, float]
     :param range_y: The range of input y-values. Can be used to adapt the color
-                    map to un-normalized input data.
+        map to un-normalized input data.
     :type range_y: Tuple[float, float]
     """
 
@@ -142,10 +143,10 @@ class ColorMap2DSteiger(ColorMap2D):
     """ColorMap2D using the Steiger color map.
 
     :param range_x: The range of input x-values. Can be used to adapt the color
-                    map to un-normalized input data.
+        map to un-normalized input data.
     :type range_x: Tuple[float, float]
     :param range_y: The range of input y-values. Can be used to adapt the color
-                    map to un-normalized input data.
+        map to un-normalized input data.
     :type range_y: Tuple[float, float]
     """
 
@@ -158,10 +159,10 @@ class ColorMap2DTeuling2(ColorMap2D):
     """ColorMap2D using the Teuling2 color map.
 
     :param range_x: The range of input x-values. Can be used to adapt the color
-                    map to un-normalized input data.
+        map to un-normalized input data.
     :type range_x: Tuple[float, float]
     :param range_y: The range of input y-values. Can be used to adapt the color
-                    map to un-normalized input data.
+        map to un-normalized input data.
     :type range_y: Tuple[float, float]
     """
 
@@ -174,10 +175,10 @@ class ColorMap2DZiegler(ColorMap2D):
     """ColorMap2D using the Ziegler color map.
 
     :param range_x: The range of input x-values. Can be used to adapt the color
-                    map to un-normalized input data.
+        map to un-normalized input data.
     :type range_x: Tuple[float, float]
     :param range_y: The range of input y-values. Can be used to adapt the color
-                    map to un-normalized input data.
+        map to un-normalized input data.
     :type range_y: Tuple[float, float]
     """
 
