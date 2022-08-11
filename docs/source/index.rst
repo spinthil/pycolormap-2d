@@ -2,7 +2,7 @@
    to your liking, but it should at least contain the root `toctree` 
    directive.
 
-Welcome to py_pkg's documentation!
+Welcome to the documentation of PyColormap 2D!
 ==================================
 
 .. toctree::

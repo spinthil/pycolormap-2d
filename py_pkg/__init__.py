@@ -2,6 +2,8 @@
 py_pkg
 ~~~~~~
 
-The py_pkg package - a Python package template project that is intended
-to be used as a cookie-cutter for developing new Python packages.
+The pycolormap-2d package - a Python package mapping 2D coordinates to colors based on different 2D color maps.
 """
+
+from .colormap_2d import (ColorMap2DBremm, ColorMap2DCubeDiagonal, ColorMap2DSchumann, ColorMap2DSteiger,
+                          ColorMap2DTeuling2, ColorMap2DZiegler)

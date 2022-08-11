@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 numpy = "*"
-requests = "*"
+nptyping = "*"
 twine = "*"
 
 [dev-packages]
@@ -17,4 +17,4 @@ sphinx = "*"
 sphinx-rtd-theme = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3.8"

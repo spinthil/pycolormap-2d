@@ -21,9 +21,9 @@ from py_pkg.__version__ import __version__
 
 # -- Project information -----------------------------------------------------
 
-project = 'Python Package Template Project'
-copyright = '2018, Alex Ioannides'
-author = 'Alex Ioannides'
+project = 'PyColormap 2D'
+copyright = '2022, Thilo Spinner'
+author = 'Thilo Spinner'
 
 # The short X.Y version
 version = __version__[:-2]
