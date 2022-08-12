@@ -8,8 +8,8 @@ This module contains the ColorMap2D base class and its instantiable children.
 import abc
 from typing import Tuple, TypeVar, Generic, Any
 
+import importlib_resources
 import numpy as np
-import pkg_resources
 from nptyping import NDArray, UInt8, Shape
 
 Number = TypeVar("Number", int, float)
@@ -44,8 +44,10 @@ class ColorMap2D(Generic[Number], metaclass=abc.ABCMeta):
         self.range_x = range_x
         self.range_y = range_y
 
-        stream = pkg_resources.resource_stream(__name__, colormap_npy_loc)
-        self._cmap_data = np.load(stream)
+        # Load color map data from resource file.
+        ref = importlib_resources.files("pycolormap_2d") / colormap_npy_loc
+        self._cmap_data = np.load(ref)
+
         self._cmap_width = self._cmap_data.shape[0]
         self._cmap_height = self._cmap_data.shape[1]
 

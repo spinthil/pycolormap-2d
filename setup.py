@@ -28,7 +28,7 @@ setup(
     include_package_data=True,
     package_data={'pycolormap_2d': ['data/*.npy']},
     python_requires=">=3.7.*",
-    install_requires=['numpy', 'nptyping'],
+    install_requires=['numpy', 'nptyping', 'importlib-resources'],
     license=about['__license__'],
     zip_safe=False,
     classifiers=[

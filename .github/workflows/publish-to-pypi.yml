@@ -32,6 +32,10 @@ jobs:
         run: >-
           pipenv run flake8 pycolormap_2d
 
+      - name: Type-check code
+        run: >-
+          pipenv run python -m mypy pycolormap_2d/*.py
+
       - name: Build a binary wheel
         run: >-
           pipenv run python setup.py bdist_wheel
