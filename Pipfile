@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 numpy = "*"
+nptyping = "*"
 
 [dev-packages]
 "flake8" = "*"
