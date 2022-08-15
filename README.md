@@ -1,6 +1,10 @@
 # Colormap 2D Python Package
 
-This package allows to map 2D coordinates to different 2D color maps. It can be installed from [PyPi](https://pypi.org/project/pycolormap-2d/).
+![PyPI](https://img.shields.io/pypi/v/pycolormap-2d)
+[![Docs](https://img.shields.io/badge/docs-pages-blue)](https://spinthil.github.io/pycolormap-2d)
+![GitHub](https://img.shields.io/github/license/spinthil/pycolormap-2d)
+
+This package allows to map 2D coordinates to different 2D color maps.
 
 The following color maps are available:
 
@@ -35,7 +39,7 @@ The package is based on
 For a JavaScript implementation, refer to the [Color2D](https://github.com/dominikjaeckle/Color2D) project by [Dominik Jäckle](http://dominikjaeckle.com/).
 
 
-## Example
+## Usage
 
 Basic usage with normalized inputs (i.e., x- and y-coordinates ranging from 0 to 1):
 
