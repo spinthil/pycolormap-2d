@@ -1,8 +1,8 @@
 # Colormap 2D Python Package
 
-![PyPI](https://img.shields.io/pypi/v/pycolormap-2d)
-[![Docs](https://img.shields.io/badge/docs-pages-blue)](https://spinthil.github.io/pycolormap-2d)
-![GitHub](https://img.shields.io/github/license/spinthil/pycolormap-2d)
+[![PyPI](https://img.shields.io/pypi/v/pycolormap-2d)](https://pypi.org/project/pycolormap-2d/)
+[![Docs](https://img.shields.io/badge/docs-pages-blue)](https://thilospinner.com/pycolormap-2d/modules.html)
+[![Apache 2.0](https://img.shields.io/github/license/spinthil/pycolormap-2d)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
 This package allows to map 2D coordinates to different 2D color maps.
 
