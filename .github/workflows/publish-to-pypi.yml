@@ -40,14 +40,25 @@ jobs:
         run: >-
           pipenv run python setup.py bdist_wheel
 
-      - name: Publish distribution to Test PyPI
-        if: ${{ !startsWith(github.ref, 'refs/tags') }}
+      - name: Build documentation
+        run: >-
+          pipenv run sphinx-build -b html docs/source docs/build_html
+
+      - name: "On `main`: Publish distribution to Test PyPI (on main)"
+        if: ${{ github.ref == 'refs/heads/main' }}
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           password: ${{ secrets.TESTPYPI_GITHUB_CI_CD_DEPLOY_TOKEN }}
           repository_url: https://test.pypi.org/legacy/
 
-      - name: Publish distribution to PyPI
+      - name: "On `tag`: Deploy Sphinx documentation to GitHub pages (on tag)"
+        if: ${{ startsWith(github.ref, 'refs/tags') }}
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/build_html
+
+      - name: "On `tag`: Publish distribution to PyPI (on tag)"
         if: ${{ startsWith(github.ref, 'refs/tags') }}
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
