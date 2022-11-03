@@ -17,6 +17,7 @@ sphinx = "*"
 sphinx-rtd-theme = "*"
 nptyping = "*"
 twine = "*"
+typing_extensions = "*"
 
 [requires]
 python_version = "3.7"

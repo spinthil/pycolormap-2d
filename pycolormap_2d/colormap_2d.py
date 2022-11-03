@@ -15,7 +15,7 @@ from nptyping import NDArray, UInt8, Shape
 Number = TypeVar("Number", int, float)
 
 
-class ColorMap2D(Generic[Number], metaclass=abc.ABCMeta):
+class BaseColorMap2D(Generic[Number], metaclass=abc.ABCMeta):
     """Abstract class providing the basic functionality of the 2D color map.
 
     :param colormap_npy_loc: The location of the numpy file that contains the
@@ -97,10 +97,10 @@ class ColorMap2D(Generic[Number], metaclass=abc.ABCMeta):
                                           (0.0, float(self._cmap_height - 1)))
 
     def _sample(self, x: Number, y: Number) -> NDArray[Shape["3"], UInt8]:
-        image_x = self._clamp(int(round(self._scale_x(x))),
-                              (0, self._cmap_width - 1))
-        image_y = self._clamp(int(round(self._scale_y(y))),
-                              (0, self._cmap_height - 1))
+        image_x = int(self._clamp(round(self._scale_x(x)),
+                                  (0, self._cmap_width - 1)))
+        image_y = int(self._clamp(round(self._scale_y(y)),
+                                  (0, self._cmap_height - 1)))
 
         return self._cmap_data[image_x, image_y, :]
 
@@ -119,7 +119,7 @@ class ColorMap2D(Generic[Number], metaclass=abc.ABCMeta):
         pass
 
 
-class ColorMap2DBremm(ColorMap2D):
+class ColorMap2DBremm(BaseColorMap2D):
     """ColorMap2D using the Bremm color map.
 
     :param range_x: The range of input x-values. Can be used to adapt the color
@@ -138,7 +138,7 @@ class ColorMap2DBremm(ColorMap2D):
         return super()._sample(x, y)
 
 
-class ColorMap2DCubeDiagonal(ColorMap2D):
+class ColorMap2DCubeDiagonal(BaseColorMap2D):
     """ColorMap2D using the CubeDiagonal color map.
 
     :param range_x: The range of input x-values. Can be used to adapt the color
@@ -157,7 +157,7 @@ class ColorMap2DCubeDiagonal(ColorMap2D):
         return super()._sample(x, y)
 
 
-class ColorMap2DSchumann(ColorMap2D):
+class ColorMap2DSchumann(BaseColorMap2D):
     """ColorMap2D using the Schumann color map.
 
     :param range_x: The range of input x-values. Can be used to adapt the color
@@ -176,7 +176,7 @@ class ColorMap2DSchumann(ColorMap2D):
         return super()._sample(x, y)
 
 
-class ColorMap2DSteiger(ColorMap2D):
+class ColorMap2DSteiger(BaseColorMap2D):
     """ColorMap2D using the Steiger color map.
 
     :param range_x: The range of input x-values. Can be used to adapt the color
@@ -195,7 +195,7 @@ class ColorMap2DSteiger(ColorMap2D):
         return super()._sample(x, y)
 
 
-class ColorMap2DTeuling2(ColorMap2D):
+class ColorMap2DTeuling2(BaseColorMap2D):
     """ColorMap2D using the Teuling2 color map.
 
     :param range_x: The range of input x-values. Can be used to adapt the color
@@ -214,7 +214,7 @@ class ColorMap2DTeuling2(ColorMap2D):
         return super()._sample(x, y)
 
 
-class ColorMap2DZiegler(ColorMap2D):
+class ColorMap2DZiegler(BaseColorMap2D):
     """ColorMap2D using the Ziegler color map.
 
     :param range_x: The range of input x-values. Can be used to adapt the color
