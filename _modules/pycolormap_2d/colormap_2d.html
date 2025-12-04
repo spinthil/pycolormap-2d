@@ -1,19 +1,18 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pycolormap_2d.colormap_2d &mdash; PyColorMap 2D 1.0.10 documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <title>pycolormap_2d.colormap_2d &mdash; PyColorMap 2D 1.1.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/doctools.js"></script>
+      <script src="../../_static/documentation_options.js?v=937269b5"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -24,14 +23,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> PyColorMap 2D
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            PyColorMap 2D
           </a>
-              <div class="version">
-                1.0.
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -54,7 +54,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
       <li class="breadcrumb-item active">pycolormap_2d.colormap_2d</li>
       <li class="wy-breadcrumbs-aside">
@@ -73,18 +73,20 @@
 <span class="sd">This module contains the ColorMap2D base class and its instantiable children.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">abc</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Generic</span><span class="p">,</span> <span class="n">Any</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">abc</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Generic</span><span class="p">,</span> <span class="n">Any</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">importlib.resources</span><span class="w"> </span><span class="kn">import</span> <span class="n">files</span>
 
-<span class="kn">import</span> <span class="nn">importlib_resources</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">nptyping</span> <span class="kn">import</span> <span class="n">NDArray</span><span class="p">,</span> <span class="n">UInt8</span><span class="p">,</span> <span class="n">Shape</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NDArray</span>
 
 <span class="n">Number</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;Number&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="BaseColorMap2D"><a class="viewcode-back" href="../../modules.html#pycolormap_2d.BaseColorMap2D">[docs]</a><span class="k">class</span> <span class="nc">BaseColorMap2D</span><span class="p">(</span><span class="n">Generic</span><span class="p">[</span><span class="n">Number</span><span class="p">],</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Abstract class providing the basic functionality of the 2D color map.</span>
+<div class="viewcode-block" id="BaseColorMap2D">
+<a class="viewcode-back" href="../../modules.html#pycolormap_2d.BaseColorMap2D">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">BaseColorMap2D</span><span class="p">(</span><span class="n">Generic</span><span class="p">[</span><span class="n">Number</span><span class="p">],</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Abstract class providing the basic functionality of the 2D color map.</span>
 
 <span class="sd">    :param colormap_npy_loc: The location of the numpy file that contains the</span>
 <span class="sd">        color map data.</span>
@@ -97,13 +99,13 @@
 <span class="sd">    :type range_y: Tuple[float, float]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">_cmap_data</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">Shape</span><span class="p">,</span> <span class="n">UInt8</span><span class="p">]</span>
+    <span class="n">_cmap_data</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span>
     <span class="n">_cmap_width</span><span class="p">:</span> <span class="nb">int</span>
     <span class="n">_cmap_height</span><span class="p">:</span> <span class="nb">int</span>
     <span class="n">range_x</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>
     <span class="n">range_y</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">colormap_npy_loc</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">range_x</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Number</span><span class="p">,</span> <span class="n">Number</span><span class="p">],</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">colormap_npy_loc</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">range_x</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Number</span><span class="p">,</span> <span class="n">Number</span><span class="p">],</span>
                  <span class="n">range_y</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Number</span><span class="p">,</span> <span class="n">Number</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_type_check_range_args</span><span class="p">(</span><span class="n">range_x</span><span class="p">,</span> <span class="s2">&quot;range_x&quot;</span><span class="p">)</span>
@@ -113,21 +115,22 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">range_y</span> <span class="o">=</span> <span class="n">range_y</span>
 
         <span class="c1"># Load color map data from resource file.</span>
-        <span class="n">ref</span> <span class="o">=</span> <span class="n">importlib_resources</span><span class="o">.</span><span class="n">files</span><span class="p">(</span><span class="s2">&quot;pycolormap_2d&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="n">colormap_npy_loc</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_cmap_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">ref</span><span class="p">)</span>
+        <span class="n">ref</span> <span class="o">=</span> <span class="n">files</span><span class="p">(</span><span class="s2">&quot;pycolormap_2d&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="n">colormap_npy_loc</span>
+        <span class="k">with</span> <span class="n">ref</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cmap_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_cmap_width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cmap_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cmap_height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cmap_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="n">class_name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s1">&#39;</span>
 
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Number</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">Shape</span><span class="p">[</span><span class="s2">&quot;3&quot;</span><span class="p">],</span> <span class="n">UInt8</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Number</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_type_check_range_args</span><span class="p">(</span><span class="n">arg_value</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">arg_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_type_check_range_args</span><span class="p">(</span><span class="n">arg_value</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">arg_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">arg_value</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">tuple</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;Argument &#39;</span><span class="si">{</span><span class="n">arg_name</span><span class="si">}</span><span class="s2">&#39; expected to be of type Tuple[Number, &quot;</span>
@@ -144,27 +147,27 @@
                 <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">arg_value</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">].&quot;</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_clamp</span><span class="p">(</span><span class="n">v</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span> <span class="n">interval</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Number</span><span class="p">,</span> <span class="n">Number</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Number</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_clamp</span><span class="p">(</span><span class="n">v</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span> <span class="n">interval</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Number</span><span class="p">,</span> <span class="n">Number</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Number</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">interval</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">max</span><span class="p">(</span><span class="n">interval</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">v</span><span class="p">))</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_linearly_scale_value</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">from_range</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_linearly_scale_value</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">from_range</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
                               <span class="n">to_range</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">value</span> <span class="o">-</span> <span class="n">from_range</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="n">to_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">to_range</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span>
                 <span class="n">from_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">from_range</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="n">to_range</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">get_cmap_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">Shape</span><span class="p">,</span> <span class="n">UInt8</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_cmap_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cmap_data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">_scale_x</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_scale_x</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_linearly_scale_value</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">range_x</span><span class="p">,</span>
                                           <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cmap_width</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)))</span>
 
-    <span class="k">def</span> <span class="nf">_scale_y</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_scale_y</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_linearly_scale_value</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">range_y</span><span class="p">,</span>
                                           <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cmap_height</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)))</span>
 
-    <span class="k">def</span> <span class="nf">_sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Number</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">Shape</span><span class="p">[</span><span class="s2">&quot;3&quot;</span><span class="p">],</span> <span class="n">UInt8</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Number</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]:</span>
         <span class="n">image_x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_clamp</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_scale_x</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span>
                                   <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cmap_width</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)))</span>
         <span class="n">image_y</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_clamp</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_scale_y</span><span class="p">(</span><span class="n">y</span><span class="p">)),</span>
@@ -172,9 +175,11 @@
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cmap_data</span><span class="p">[</span><span class="n">image_x</span><span class="p">,</span> <span class="n">image_y</span><span class="p">,</span> <span class="p">:]</span>
 
-<div class="viewcode-block" id="BaseColorMap2D.sample"><a class="viewcode-back" href="../../modules.html#pycolormap_2d.BaseColorMap2D.sample">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
-    <span class="k">def</span> <span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Number</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">Shape</span><span class="p">[</span><span class="s2">&quot;3&quot;</span><span class="p">],</span> <span class="n">UInt8</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;Get the color value at position (x, y).</span>
+<div class="viewcode-block" id="BaseColorMap2D.sample">
+<a class="viewcode-back" href="../../modules.html#pycolormap_2d.BaseColorMap2D.sample">[docs]</a>
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Number</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the color value at position (x, y).</span>
 
 <span class="sd">        :param x: The x-coordinate (in the x_range given in the constructor or</span>
 <span class="sd">            [0, 1] otherwise).</span>
@@ -182,13 +187,17 @@
 <span class="sd">        :param y: The y-coordinate (in the y_range given in the constructor or</span>
 <span class="sd">            [0, 1] otherwise).</span>
 <span class="sd">        :type y: int or float</span>
-<span class="sd">        :rtype: NDArray[Shape[&quot;3&quot;], UInt8]</span>
+<span class="sd">        :rtype: NDArray[np.uint8] with shape (3,)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span></div></div>
+        <span class="k">pass</span></div>
+</div>
 
 
-<div class="viewcode-block" id="ColorMap2DBremm"><a class="viewcode-back" href="../../modules.html#pycolormap_2d.ColorMap2DBremm">[docs]</a><span class="k">class</span> <span class="nc">ColorMap2DBremm</span><span class="p">(</span><span class="n">BaseColorMap2D</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;ColorMap2D using the Bremm color map.</span>
+
+<div class="viewcode-block" id="ColorMap2DBremm">
+<a class="viewcode-back" href="../../modules.html#pycolormap_2d.ColorMap2DBremm">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ColorMap2DBremm</span><span class="p">(</span><span class="n">BaseColorMap2D</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ColorMap2D using the Bremm color map.</span>
 
 <span class="sd">    :param range_x: The range of input x-values. Can be used to adapt the color</span>
 <span class="sd">        map to un-normalized input data.</span>
@@ -198,16 +207,22 @@
 <span class="sd">    :type range_y: Tuple[float, float]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">range_x</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">range_x</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
                  <span class="n">range_y</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;data/bremm.npy&quot;</span><span class="p">,</span> <span class="n">range_x</span><span class="p">,</span> <span class="n">range_y</span><span class="p">)</span>
 
-<div class="viewcode-block" id="ColorMap2DBremm.sample"><a class="viewcode-back" href="../../modules.html#pycolormap_2d.ColorMap2DBremm.sample">[docs]</a>    <span class="k">def</span> <span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Number</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">Shape</span><span class="p">[</span><span class="s2">&quot;3&quot;</span><span class="p">],</span> <span class="n">UInt8</span><span class="p">]:</span>
-        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_sample</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></div></div>
+<div class="viewcode-block" id="ColorMap2DBremm.sample">
+<a class="viewcode-back" href="../../modules.html#pycolormap_2d.ColorMap2DBremm.sample">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Number</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_sample</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></div>
+</div>
 
 
-<div class="viewcode-block" id="ColorMap2DCubeDiagonal"><a class="viewcode-back" href="../../modules.html#pycolormap_2d.ColorMap2DCubeDiagonal">[docs]</a><span class="k">class</span> <span class="nc">ColorMap2DCubeDiagonal</span><span class="p">(</span><span class="n">BaseColorMap2D</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;ColorMap2D using the CubeDiagonal color map.</span>
+
+<div class="viewcode-block" id="ColorMap2DCubeDiagonal">
+<a class="viewcode-back" href="../../modules.html#pycolormap_2d.ColorMap2DCubeDiagonal">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ColorMap2DCubeDiagonal</span><span class="p">(</span><span class="n">BaseColorMap2D</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ColorMap2D using the CubeDiagonal color map.</span>
 
 <span class="sd">    :param range_x: The range of input x-values. Can be used to adapt the color</span>
 <span class="sd">        map to un-normalized input data.</span>
@@ -217,16 +232,22 @@
 <span class="sd">    :type range_y: Tuple[float, float]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">range_x</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">range_x</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
                  <span class="n">range_y</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;data/cubediagonal.npy&quot;</span><span class="p">,</span> <span class="n">range_x</span><span class="p">,</span> <span class="n">range_y</span><span class="p">)</span>
 
-<div class="viewcode-block" id="ColorMap2DCubeDiagonal.sample"><a class="viewcode-back" href="../../modules.html#pycolormap_2d.ColorMap2DCubeDiagonal.sample">[docs]</a>    <span class="k">def</span> <span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Number</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">Shape</span><span class="p">[</span><span class="s2">&quot;3&quot;</span><span class="p">],</span> <span class="n">UInt8</span><span class="p">]:</span>
-        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_sample</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></div></div>
+<div class="viewcode-block" id="ColorMap2DCubeDiagonal.sample">
+<a class="viewcode-back" href="../../modules.html#pycolormap_2d.ColorMap2DCubeDiagonal.sample">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Number</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_sample</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></div>
+</div>
 
 
-<div class="viewcode-block" id="ColorMap2DSchumann"><a class="viewcode-back" href="../../modules.html#pycolormap_2d.ColorMap2DSchumann">[docs]</a><span class="k">class</span> <span class="nc">ColorMap2DSchumann</span><span class="p">(</span><span class="n">BaseColorMap2D</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;ColorMap2D using the Schumann color map.</span>
+
+<div class="viewcode-block" id="ColorMap2DSchumann">
+<a class="viewcode-back" href="../../modules.html#pycolormap_2d.ColorMap2DSchumann">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ColorMap2DSchumann</span><span class="p">(</span><span class="n">BaseColorMap2D</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ColorMap2D using the Schumann color map.</span>
 
 <span class="sd">    :param range_x: The range of input x-values. Can be used to adapt the color</span>
 <span class="sd">        map to un-normalized input data.</span>
@@ -236,16 +257,22 @@
 <span class="sd">    :type range_y: Tuple[float, float]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">range_x</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">range_x</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
                  <span class="n">range_y</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;data/schumann.npy&quot;</span><span class="p">,</span> <span class="n">range_x</span><span class="p">,</span> <span class="n">range_y</span><span class="p">)</span>
 
-<div class="viewcode-block" id="ColorMap2DSchumann.sample"><a class="viewcode-back" href="../../modules.html#pycolormap_2d.ColorMap2DSchumann.sample">[docs]</a>    <span class="k">def</span> <span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Number</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">Shape</span><span class="p">[</span><span class="s2">&quot;3&quot;</span><span class="p">],</span> <span class="n">UInt8</span><span class="p">]:</span>
-        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_sample</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></div></div>
+<div class="viewcode-block" id="ColorMap2DSchumann.sample">
+<a class="viewcode-back" href="../../modules.html#pycolormap_2d.ColorMap2DSchumann.sample">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Number</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_sample</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></div>
+</div>
 
 
-<div class="viewcode-block" id="ColorMap2DSteiger"><a class="viewcode-back" href="../../modules.html#pycolormap_2d.ColorMap2DSteiger">[docs]</a><span class="k">class</span> <span class="nc">ColorMap2DSteiger</span><span class="p">(</span><span class="n">BaseColorMap2D</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;ColorMap2D using the Steiger color map.</span>
+
+<div class="viewcode-block" id="ColorMap2DSteiger">
+<a class="viewcode-back" href="../../modules.html#pycolormap_2d.ColorMap2DSteiger">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ColorMap2DSteiger</span><span class="p">(</span><span class="n">BaseColorMap2D</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ColorMap2D using the Steiger color map.</span>
 
 <span class="sd">    :param range_x: The range of input x-values. Can be used to adapt the color</span>
 <span class="sd">        map to un-normalized input data.</span>
@@ -255,16 +282,22 @@
 <span class="sd">    :type range_y: Tuple[float, float]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">range_x</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">range_x</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
                  <span class="n">range_y</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;data/steiger.npy&quot;</span><span class="p">,</span> <span class="n">range_x</span><span class="p">,</span> <span class="n">range_y</span><span class="p">)</span>
 
-<div class="viewcode-block" id="ColorMap2DSteiger.sample"><a class="viewcode-back" href="../../modules.html#pycolormap_2d.ColorMap2DSteiger.sample">[docs]</a>    <span class="k">def</span> <span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Number</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">Shape</span><span class="p">[</span><span class="s2">&quot;3&quot;</span><span class="p">],</span> <span class="n">UInt8</span><span class="p">]:</span>
-        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_sample</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></div></div>
+<div class="viewcode-block" id="ColorMap2DSteiger.sample">
+<a class="viewcode-back" href="../../modules.html#pycolormap_2d.ColorMap2DSteiger.sample">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Number</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_sample</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></div>
+</div>
 
 
-<div class="viewcode-block" id="ColorMap2DTeuling2"><a class="viewcode-back" href="../../modules.html#pycolormap_2d.ColorMap2DTeuling2">[docs]</a><span class="k">class</span> <span class="nc">ColorMap2DTeuling2</span><span class="p">(</span><span class="n">BaseColorMap2D</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;ColorMap2D using the Teuling2 color map.</span>
+
+<div class="viewcode-block" id="ColorMap2DTeuling2">
+<a class="viewcode-back" href="../../modules.html#pycolormap_2d.ColorMap2DTeuling2">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ColorMap2DTeuling2</span><span class="p">(</span><span class="n">BaseColorMap2D</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ColorMap2D using the Teuling2 color map.</span>
 
 <span class="sd">    :param range_x: The range of input x-values. Can be used to adapt the color</span>
 <span class="sd">        map to un-normalized input data.</span>
@@ -274,16 +307,22 @@
 <span class="sd">    :type range_y: Tuple[float, float]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">range_x</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">range_x</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
                  <span class="n">range_y</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;data/teulingfig2.npy&quot;</span><span class="p">,</span> <span class="n">range_x</span><span class="p">,</span> <span class="n">range_y</span><span class="p">)</span>
 
-<div class="viewcode-block" id="ColorMap2DTeuling2.sample"><a class="viewcode-back" href="../../modules.html#pycolormap_2d.ColorMap2DTeuling2.sample">[docs]</a>    <span class="k">def</span> <span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Number</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">Shape</span><span class="p">[</span><span class="s2">&quot;3&quot;</span><span class="p">],</span> <span class="n">UInt8</span><span class="p">]:</span>
-        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_sample</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></div></div>
+<div class="viewcode-block" id="ColorMap2DTeuling2.sample">
+<a class="viewcode-back" href="../../modules.html#pycolormap_2d.ColorMap2DTeuling2.sample">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Number</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_sample</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></div>
+</div>
 
 
-<div class="viewcode-block" id="ColorMap2DZiegler"><a class="viewcode-back" href="../../modules.html#pycolormap_2d.ColorMap2DZiegler">[docs]</a><span class="k">class</span> <span class="nc">ColorMap2DZiegler</span><span class="p">(</span><span class="n">BaseColorMap2D</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;ColorMap2D using the Ziegler color map.</span>
+
+<div class="viewcode-block" id="ColorMap2DZiegler">
+<a class="viewcode-back" href="../../modules.html#pycolormap_2d.ColorMap2DZiegler">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ColorMap2DZiegler</span><span class="p">(</span><span class="n">BaseColorMap2D</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ColorMap2D using the Ziegler color map.</span>
 
 <span class="sd">    :param range_x: The range of input x-values. Can be used to adapt the color</span>
 <span class="sd">        map to un-normalized input data.</span>
@@ -293,12 +332,16 @@
 <span class="sd">    :type range_y: Tuple[float, float]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">range_x</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">range_x</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
                  <span class="n">range_y</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;data/ziegler.npy&quot;</span><span class="p">,</span> <span class="n">range_x</span><span class="p">,</span> <span class="n">range_y</span><span class="p">)</span>
 
-<div class="viewcode-block" id="ColorMap2DZiegler.sample"><a class="viewcode-back" href="../../modules.html#pycolormap_2d.ColorMap2DZiegler.sample">[docs]</a>    <span class="k">def</span> <span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Number</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">Shape</span><span class="p">[</span><span class="s2">&quot;3&quot;</span><span class="p">],</span> <span class="n">UInt8</span><span class="p">]:</span>
-        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_sample</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></div></div>
+<div class="viewcode-block" id="ColorMap2DZiegler.sample">
+<a class="viewcode-back" href="../../modules.html#pycolormap_2d.ColorMap2DZiegler.sample">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Number</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">Number</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_sample</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></div>
+</div>
+
 </pre></div>
 
            </div>
