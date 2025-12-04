@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.9"
 license = {text = "Apache-2.0"}
 authors = [
-    {name = "Thilo Spinner", email = "thilo.spinner@uni-konstanz.de"}
+    {name = "Thilo Spinner"}
 ]
 keywords = ["colormap", "visualization"]
 classifiers = [

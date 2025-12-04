@@ -1,19 +1,33 @@
+# This workflow builds and publishes Python distributions to PyPI.
+# It only runs after the "Test and Lint" workflow succeeds, and only for
+# pushes to the main branch or tag pushes. On main branch: publishes to TestPyPI.
+# On tags: publishes to production PyPI and deploys documentation to GitHub Pages.
 name: Publish Python distributions to PyPI and TestPyPI
 
-on: push
+on:
+  workflow_run:
+    workflows: ["Test and Lint"]
+    types:
+      - completed
 
 jobs:
+  # Build and publish job: Creates distribution packages, builds documentation,
+  # and publishes to PyPI/TestPyPI based on the branch/tag.
   build-n-publish:
     name: Build and publish Python distributions to PyPI and TestPyPI
     runs-on: ubuntu-latest
+    # Only run if the test-and-lint workflow succeeded and the ref is main or a tag.
+    if: ${{ github.event.workflow_run.conclusion == 'success' && (github.event.workflow_run.head_branch == 'main' || github.event.workflow_run.head_branch == null) }}
 
     steps:
       - uses: actions/checkout@master
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.13"
+          python-version: "3.9"  # Set the Python version to 3.9 is it is the one specified in the Pipfile as a requirement
 
       - name: Install Pipenv
         run: >-
@@ -23,18 +37,6 @@ jobs:
       - name: Install project dependencies
         run: >-
           pipenv install --dev
-
-      - name: Run unit tests
-        run: >-
-          pipenv run pytest
-
-      - name: Lint code
-        run: >-
-          pipenv run flake8 pycolormap_2d
-
-      - name: Type-check code
-        run: >-
-          pipenv run python -m mypy pycolormap_2d
 
       - name: Install build tools
         run: pipenv run pip install build
@@ -47,21 +49,21 @@ jobs:
           pipenv run sphinx-build -b html docs/source docs/build_html
 
       - name: "On `main`: Publish distribution to Test PyPI"
-        if: ${{ github.ref == 'refs/heads/main' }}
+        if: ${{ github.event.workflow_run.head_branch == 'main' }}
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           password: ${{ secrets.TESTPYPI_GITHUB_CI_CD_DEPLOY_TOKEN }}
           repository_url: https://test.pypi.org/legacy/
 
       - name: "On `tag`: Deploy Sphinx documentation to GitHub pages"
-        if: ${{ startsWith(github.ref, 'refs/tags') }}
+        if: ${{ github.event.workflow_run.head_branch == null }}
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs/build_html
 
       - name: "On `tag`: Publish distribution to PyPI"
-        if: ${{ startsWith(github.ref, 'refs/tags') }}
+        if: ${{ github.event.workflow_run.head_branch == null }}
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           password: ${{ secrets.PYPI_GITHUB_CI_CD_DEPLOY_TOKEN }}
