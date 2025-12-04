@@ -19,7 +19,7 @@ from pycolormap_2d.__version__ import __version__
 # -- Project information -----------------------------------------------------
 
 project = 'PyColorMap 2D'
-copyright = '2022, Thilo Spinner'
+copyright = '2025, Thilo Spinner'
 author = 'Thilo Spinner'
 
 # The short X.Y version
