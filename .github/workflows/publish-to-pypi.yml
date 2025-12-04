@@ -10,10 +10,10 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
-      - name: Set up Python 3.7
-        uses: actions/setup-python@v3
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.7"
+          python-version: "3.13"
 
       - name: Install Pipenv
         run: >-
@@ -34,11 +34,13 @@ jobs:
 
       - name: Type-check code
         run: >-
-          pipenv run python -m mypy pycolormap_2d/*.py
+          pipenv run python -m mypy pycolormap_2d
 
-      - name: Build a binary wheel
-        run: >-
-          pipenv run python setup.py bdist_wheel
+      - name: Install build tools
+        run: pipenv run pip install build
+
+      - name: Build distribution
+        run: pipenv run python -m build
 
       - name: Build documentation
         run: >-

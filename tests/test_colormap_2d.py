@@ -6,7 +6,6 @@ TODO
 Test suite for the pycolormap_2d.py module.
 """
 import numpy as np
-from nptyping import NDArray, UInt8, Shape
 
 from pycolormap_2d import (ColorMap2DBremm)
 
@@ -17,31 +16,33 @@ class TestColorMap2D:
     def test_colormap_load(self):
         """Test data file load"""
         cmap = ColorMap2DBremm()
-        assert isinstance(cmap.get_cmap_data(),
-                          NDArray[Shape["512, 512, 3"], UInt8])
+        data = cmap.get_cmap_data()
+        assert isinstance(data, np.ndarray)
+        assert data.shape == (512, 512, 3)
+        assert data.dtype == np.uint8
 
     def test_colormap_constructor_type_check(self):
         """Test data file load"""
         try:
-            cmap = ColorMap2DBremm(range_x="")
+            ColorMap2DBremm(range_x="")
             assert False
         except Exception as e:
             assert type(e) is ValueError
 
         try:
-            cmap = ColorMap2DBremm(range_y="")
+            ColorMap2DBremm(range_y="")
             assert False
         except Exception as e:
             assert type(e) is ValueError
 
         try:
-            cmap = ColorMap2DBremm(range_x=(3, ""))
+            ColorMap2DBremm(range_x=(3, ""))
             assert False
         except Exception as e:
             assert type(e) is ValueError
 
         try:
-            cmap = ColorMap2DBremm(range_x=(3, 7, 9))
+            ColorMap2DBremm(range_x=(3, 7, 9))
             assert False
         except Exception as e:
             assert type(e) is ValueError
@@ -49,7 +50,10 @@ class TestColorMap2D:
     def test_colormap_call_result_type(self):
         """Test color map sampling"""
         cmap = ColorMap2DBremm()
-        assert isinstance(cmap(0, 0), NDArray[Shape["3"], UInt8])
+        result = cmap(0, 0)
+        assert isinstance(result, np.ndarray)
+        assert result.shape == (3,)
+        assert result.dtype == np.uint8
 
     def test_colormap_call_result_value(self):
         """Test color map sampling"""

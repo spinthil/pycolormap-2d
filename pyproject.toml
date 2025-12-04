@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pycolormap-2d"
+dynamic = ["version"]
+description = "A Python package mapping 2D coordinates to colors based on different 2D color maps."
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "Apache-2.0"}
+authors = [
+    {name = "Thilo Spinner", email = "thilo.spinner@uni-konstanz.de"}
+]
+keywords = ["colormap", "visualization"]
+classifiers = [
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Education",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+dependencies = [
+    "numpy",
+]
+urls = {Homepage = "https://github.com/spinthil/pycolormap-2d"}
+
+[tool.setuptools]
+packages = ["pycolormap_2d"]
+include-package-data = true
+zip-safe = false
+
+[tool.setuptools.package-data]
+pycolormap_2d = ["data/*.npy"]
+
+[tool.setuptools.dynamic]
+version = {attr = "pycolormap_2d.__version__.__version__"}
+

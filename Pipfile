@@ -5,19 +5,13 @@ name = "pypi"
 
 [packages]
 numpy = "*"
-nptyping = "*"
-importlib-resources = "*"
 
 [dev-packages]
 "flake8" = "*"
 pytest = "*"
-ipython = "*"
 mypy = "*"
 sphinx = "*"
 sphinx-rtd-theme = "*"
-nptyping = "*"
-twine = "*"
-typing_extensions = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3.9"
