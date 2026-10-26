@@ -1,5 +1,5 @@
 # This workflow runs tests, linting, and publishes Python distributions to PyPI.
-# It tests compatibility across multiple Python versions (3.9-3.13) and performs
+# It tests compatibility across multiple Python versions (3.9-3.15) and performs
 # code quality checks (linting with flake8 and type checking with mypy).
 # On main branch: publishes to TestPyPI.
 # On tags: publishes to production PyPI and deploys documentation to GitHub Pages.
@@ -23,14 +23,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ "3.9", "3.10", "3.11", "3.12", "3.13" ]
+        python-version: [ "3.9", "3.10", "3.11", "3.12", "3.13", "3.14", "3.15" ]
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
           cache: 'pip'
@@ -56,12 +56,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
-          python-version: "3.13"
+          python-version: "3.15"
 
       - name: Install flake8
         run: pip install flake8
@@ -81,12 +81,12 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
-          python-version: "3.9"  # Set the Python version to 3.9 as it is the one specified in the Pipfile as a requirement
+          python-version: "3.15"  # Matches the Python version required by the Pipfile
 
       - name: Install Pipenv
         run: python -m pip install pipenv
@@ -112,7 +112,7 @@ jobs:
 
       - name: "On `tag`: Deploy Sphinx documentation to GitHub pages"
         if: startsWith(github.ref, 'refs/tags/')
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs/build_html
