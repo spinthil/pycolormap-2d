@@ -168,9 +168,6 @@ class TestColorMap2DIsolation:
         data[:] = 0
         assert np.array_equal(cmap(0, 0), np.array([72, 149, 15]))
 
-    @pytest.mark.xfail(
-        strict=True,
-        reason="sample() returns a view into the color map data")
     def test_sample_returns_copy(self):
         """Test that changing a sampled color leaves the color map as is"""
         cmap = ColorMap2DBremm()
@@ -179,9 +176,6 @@ class TestColorMap2DIsolation:
         assert np.array_equal(cmap(0, 0), np.array([72, 149, 15]))
 
 
-@pytest.mark.xfail(
-    strict=True,
-    reason="the error message reports the type of the argument name")
 def test_range_type_error_names_value_type():
     """Test that the error message names the type of the passed value"""
     with pytest.raises(ValueError, match="Instead was list"):

@@ -64,7 +64,7 @@ class BaseColorMap2D(Generic[Number], metaclass=abc.ABCMeta):
         if type(arg_value) is not tuple:
             raise ValueError(
                 f"Argument '{arg_name}' expected to be of type Tuple[Number, "
-                f"Number]. Instead was {type(arg_name).__name__}.")
+                f"Number]. Instead was {type(arg_value).__name__}.")
         if len(arg_value) != 2:
             raise ValueError(
                 f"Argument '{arg_name}' is expected to have two elements. "
@@ -103,7 +103,7 @@ class BaseColorMap2D(Generic[Number], metaclass=abc.ABCMeta):
         image_y = int(self._clamp(round(self._scale_y(y)),
                                   (0, self._cmap_height - 1)))
 
-        return self._cmap_data[image_x, image_y, :]
+        return self._cmap_data[image_x, image_y, :].copy()
 
     @abc.abstractmethod
     def sample(self, x: Number, y: Number) -> NDArray[np.uint8]:
